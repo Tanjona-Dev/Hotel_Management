@@ -19,6 +19,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { reservation } from "../../Data/reservation";
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
@@ -74,6 +75,10 @@ const Calendar = () => {
     </div>
   );
 };
+
+const LundiDuMois = reservation.filter((reserv)=> {
+  reserv.sejour === ''
+})
 
 function AffichageChambreReservee() {
   return (

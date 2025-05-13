@@ -203,9 +203,17 @@ function Calendrier() {
   const [selectYear, setSelecteYear] = useState("");
 
   // FILTRE LES Reservation
+  const dateRecherche = `${selectYear}-0${selectMonth}-${selectedDay}`;
   const filteredReservations = selectedDay
-    ? reservation.filter((res) => res.sejour.split(",").includes(selectedDay))
+    ? reservation.filter((res) => res.sejour.includes(dateRecherche))
     : reservation.filter((_, index) => index > reservation.length - 5);
+
+  const joursDuSejours = filteredReservations.map((client) => {
+    return {
+      jours: client.sejour.map((dateStr) => new Date(dateStr).getDate()),
+    };
+  });
+  console.log(joursDuSejours);
 
   return (
     <div className="flex">
@@ -241,15 +249,15 @@ function Calendrier() {
                   <td>
                     <span
                       className={`${
-                        reserv.sejour.split(",").length > 1
-                          ? "bg-red-500"
-                          : "bg-green-500"
+                        reserv.sejour.length > 1 ? "bg-red-500" : "bg-green-500"
                       } ${
-                        reserv.sejour.split(",").length === 2 && "bg-yellow-500"
+                        reserv.sejour.length === 2 && "bg-yellow-500"
                       } p-3 rounded  ml-15`}
                     >
                       {" "}
-                      {reserv.sejour}
+                      {reserv.sejour
+                        .map((dateStr) => new Date(dateStr).getDate())
+                        .join(", ")}
                     </span>
                   </td>
                 </tr>

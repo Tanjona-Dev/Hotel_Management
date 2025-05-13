@@ -2,7 +2,7 @@ export const reservation = [
   {
     id: 1,
     nom: "Robert Descamps",
-    sejour: "17",
+    sejour: ["2025-05-17"],
     typeChambre: "Chambre B-02",
     picture: "https://picsum.photos/200/300?random=101",
     image: "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
@@ -10,7 +10,7 @@ export const reservation = [
   {
     id: 2,
     nom: "Adrienne Legros",
-    sejour: "17",
+    sejour: ["2025-05-17"],
     typeChambre: "Suite C-01",
     picture: "https://picsum.photos/200/300?random=102",
     image: "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg",
@@ -18,7 +18,7 @@ export const reservation = [
   {
     id: 3,
     nom: "Valérie Rodriguez",
-    sejour: "17, 18",
+    sejour: ["2025-05-17", "2025-05-18"],
     typeChambre: "Suite C-01",
     picture: "https://picsum.photos/200/300?random=103",
     image: "https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg",
@@ -26,7 +26,7 @@ export const reservation = [
   {
     id: 4,
     nom: "Michel Dupont",
-    sejour: "17, 18, 19",
+    sejour: ["2025-05-17", "2025-05-18", "2025-05-19"],
     typeChambre: "Suite C-01",
     picture: "https://picsum.photos/200/300?random=104",
     image: "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg",
@@ -34,7 +34,7 @@ export const reservation = [
   {
     id: 5,
     nom: "Sophie Garnier",
-    sejour: "16, 17, 18",
+    sejour: ["2025-05-16", "2025-05-17", "2025-05-18"],
     typeChambre: "Deluxe A-01",
     picture: "https://picsum.photos/200/300?random=105",
     image: "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
@@ -42,7 +42,7 @@ export const reservation = [
   {
     id: 6,
     nom: "Thomas Leroy",
-    sejour: "20, 21",
+    sejour: ["2025-05-20", "2025-05-21"],
     typeChambre: "Chambre B-03",
     picture: "https://picsum.photos/200/300?random=106",
     image: "https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg",
@@ -50,7 +50,7 @@ export const reservation = [
   {
     id: 7,
     nom: "Élodie Martin",
-    sejour: "22",
+    sejour: ["2025-05-22"],
     typeChambre: "Suite D-02",
     picture: "https://picsum.photos/200/300?random=107",
     image: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",
@@ -58,7 +58,7 @@ export const reservation = [
   {
     id: 8,
     nom: "Jean Dubois",
-    sejour: "18, 19, 20",
+    sejour: ["2025-05-18", "2025-05-19", "2025-05-20"],
     typeChambre: "Chambre A-04",
     picture: "https://picsum.photos/200/300?random=108",
     image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
@@ -66,7 +66,7 @@ export const reservation = [
   {
     id: 9,
     nom: "Camille Lefèvre",
-    sejour: "17",
+    sejour: ["2025-05-17"],
     typeChambre: "Deluxe A-02",
     picture: "https://picsum.photos/200/300?random=109",
     image: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg",
@@ -74,7 +74,7 @@ export const reservation = [
   {
     id: 10,
     nom: "Nicolas Bertrand",
-    sejour: "19, 20",
+    sejour: ["2025-05-19", "2025-05-20"],
     typeChambre: "Suite C-03",
     picture: "https://picsum.photos/200/300?random=110",
     image: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg",
@@ -82,7 +82,7 @@ export const reservation = [
   {
     id: 11,
     nom: "Amélie Petit",
-    sejour: "21, 22, 23",
+    sejour: ["2025-05-21", "2025-05-22", "2025-05-23"],
     typeChambre: "Chambre B-05",
     picture: "https://picsum.photos/200/300?random=111",
     image: "https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg",
@@ -90,7 +90,7 @@ export const reservation = [
   {
     id: 12,
     nom: "François Moreau",
-    sejour: "24",
+    sejour: ["2025-05-24"],
     typeChambre: "Suite D-01",
     picture: "https://picsum.photos/200/300?random=112",
     image: "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg",
@@ -98,7 +98,7 @@ export const reservation = [
   {
     id: 13,
     nom: "Laura Sanchez",
-    sejour: "17, 18",
+    sejour: ["2025-05-17", "2025-05-18"],
     typeChambre: "Deluxe A-03",
     picture: "https://picsum.photos/200/300?random=113",
     image: "https://images.pexels.com/photos/1643389/pexels-photo-1643389.jpeg",
@@ -106,7 +106,7 @@ export const reservation = [
   {
     id: 14,
     nom: "Patrick Rousseau",
-    sejour: "19",
+    sejour: ["2025-05-19"],
     typeChambre: "Chambre B-06",
     picture: "https://picsum.photos/200/300?random=114",
     image: "https://images.pexels.com/photos/271644/pexels-photo-271644.jpeg",
@@ -114,7 +114,7 @@ export const reservation = [
   {
     id: 15,
     nom: "Émilie Laurent",
-    sejour: "20, 21, 22",
+    sejour: ["2025-05-20", "2025-05-21", "2025-05-22"],
     typeChambre: "Suite C-04",
     picture: "https://picsum.photos/200/300?random=115",
     image: "https://images.pexels.com/photos/258163/pexels-photo-258163.jpeg",
@@ -122,7 +122,7 @@ export const reservation = [
   {
     id: 16,
     nom: "David Mercier",
-    sejour: "23",
+    sejour: ["2025-05-23"],
     typeChambre: "Chambre A-05",
     picture: "https://picsum.photos/200/300?random=116",
     image: "https://images.pexels.com/photos/1457844/pexels-photo-1457844.jpeg",
@@ -130,7 +130,7 @@ export const reservation = [
   {
     id: 17,
     nom: "Christine Lemoine",
-    sejour: "24, 25",
+    sejour: ["2025-05-24", "2025-05-25"],
     typeChambre: "Deluxe A-04",
     picture: "https://picsum.photos/200/300?random=117",
     image: "https://images.pexels.com/photos/271645/pexels-photo-271645.jpeg",
@@ -138,7 +138,7 @@ export const reservation = [
   {
     id: 18,
     nom: "Stéphane Girard",
-    sejour: "17, 18, 19",
+    sejour: ["2025-05-17", "2025-05-18", "2025-05-19"],
     typeChambre: "Suite D-03",
     picture: "https://picsum.photos/200/300?random=118",
     image: "https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg",
@@ -146,7 +146,7 @@ export const reservation = [
   {
     id: 19,
     nom: "Vanessa Colin",
-    sejour: "20",
+    sejour: ["2025-05-20"],
     typeChambre: "Chambre B-07",
     picture: "https://picsum.photos/200/300?random=119",
     image: "https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg",
@@ -154,7 +154,7 @@ export const reservation = [
   {
     id: 20,
     nom: "Alexandre Gauthier",
-    sejour: "21, 22",
+    sejour: ["2025-05-21", "2025-05-22"],
     typeChambre: "Suite C-05",
     picture: "https://picsum.photos/200/300?random=120",
     image: "https://images.pexels.com/photos/271646/pexels-photo-271646.jpeg",
@@ -162,7 +162,7 @@ export const reservation = [
   {
     id: 21,
     nom: "Marine Fernandez",
-    sejour: "23, 24, 25",
+    sejour: ["2025-05-23", "2025-05-24", "2025-05-25"],
     typeChambre: "Deluxe A-05",
     picture: "https://picsum.photos/200/300?random=121",
     image: "https://images.pexels.com/photos/258164/pexels-photo-258164.jpeg",
@@ -170,7 +170,7 @@ export const reservation = [
   {
     id: 22,
     nom: "Jérémy Perrot",
-    sejour: "17",
+    sejour: ["2025-05-17"],
     typeChambre: "Chambre A-06",
     picture: "https://picsum.photos/200/300?random=122",
     image: "https://images.pexels.com/photos/1457845/pexels-photo-1457845.jpeg",
@@ -178,7 +178,7 @@ export const reservation = [
   {
     id: 23,
     nom: "Céline Roux",
-    sejour: "18, 19",
+    sejour: ["2025-05-18", "2025-05-19"],
     typeChambre: "Suite D-04",
     picture: "https://picsum.photos/200/300?random=123",
     image: "https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg",
@@ -186,7 +186,7 @@ export const reservation = [
   {
     id: 24,
     nom: "Mathieu Chevalier",
-    sejour: "20, 21",
+    sejour: ["2025-05-20", "2025-05-21"],
     typeChambre: "Chambre B-08",
     picture: "https://picsum.photos/200/300?random=124",
     image: "https://images.pexels.com/photos/1643385/pexels-photo-1643385.jpeg",
@@ -194,7 +194,7 @@ export const reservation = [
   {
     id: 25,
     nom: "Aurélie Barbier",
-    sejour: "22",
+    sejour: ["2025-05-22"],
     typeChambre: "Suite C-06",
     picture: "https://picsum.photos/200/300?random=125",
     image: "https://images.pexels.com/photos/271647/pexels-photo-271647.jpeg",
@@ -202,7 +202,7 @@ export const reservation = [
   {
     id: 26,
     nom: "Sébastien Arnaud",
-    sejour: "23, 24, 25",
+    sejour: ["2025-05-23", "2025-05-24", "2025-05-25"],
     typeChambre: "Deluxe A-06",
     picture: "https://picsum.photos/200/300?random=126",
     image: "https://images.pexels.com/photos/258165/pexels-photo-258165.jpeg",
@@ -210,7 +210,7 @@ export const reservation = [
   {
     id: 27,
     nom: "Pauline Marchand",
-    sejour: "17, 18",
+    sejour: ["2025-05-17", "2025-05-18"],
     typeChambre: "Chambre A-07",
     picture: "https://picsum.photos/200/300?random=127",
     image: "https://images.pexels.com/photos/1457846/pexels-photo-1457846.jpeg",
@@ -218,7 +218,7 @@ export const reservation = [
   {
     id: 28,
     nom: "Romain Guerin",
-    sejour: "19, 20, 21",
+    sejour: ["2025-05-19", "2025-05-20", "2025-05-21"],
     typeChambre: "Suite D-05",
     picture: "https://picsum.photos/200/300?random=128",
     image: "https://images.pexels.com/photos/1571465/pexels-photo-1571465.jpeg",
@@ -226,7 +226,7 @@ export const reservation = [
   {
     id: 29,
     nom: "Anaïs Roy",
-    sejour: "22, 23",
+    sejour: ["2025-05-22", "2025-05-23"],
     typeChambre: "Chambre B-09",
     picture: "https://picsum.photos/200/300?random=129",
     image: "https://images.pexels.com/photos/1457845/pexels-photo-1457845.jpeg",
@@ -234,7 +234,7 @@ export const reservation = [
   {
     id: 30,
     nom: "Julien Leclerc",
-    sejour: "24",
+    sejour: ["2025-05-24"],
     typeChambre: "Suite C-07",
     picture: "https://picsum.photos/200/300?random=130",
     image: "https://images.pexels.com/photos/271648/pexels-photo-271648.jpeg",
