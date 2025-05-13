@@ -229,7 +229,7 @@ export const reservation = [
     sejour: "22, 23",
     typeChambre: "Chambre B-09",
     picture: "https://picsum.photos/200/300?random=129",
-    image: "https://images.pexels.com/photos/1643386/pexels-photo-1643386.jpeg",
+    image: "https://images.pexels.com/photos/1457845/pexels-photo-1457845.jpeg",
   },
   {
     id: 30,
@@ -238,5 +238,5 @@ export const reservation = [
     typeChambre: "Suite C-07",
     picture: "https://picsum.photos/200/300?random=130",
     image: "https://images.pexels.com/photos/271648/pexels-photo-271648.jpeg",
-  }
+  },
 ];
