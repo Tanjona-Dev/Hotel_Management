@@ -6,6 +6,7 @@ import { LiensProvider } from "./utils/context";
 import MainLayout from "./Components/Navigation/MainLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Calendrier from "./Pages/Calendrier";
+import Reservation from "./Pages/Reservation";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/Clients" element={<Clients />} />
               <Route path="/Chambres" element={<Chambres />} />
               <Route path="/Calendrier" element={<Calendrier />} />
+              <Route path="/Reservation" element={<Reservation />} />
             </Route>
           </Routes>
         </LiensProvider>

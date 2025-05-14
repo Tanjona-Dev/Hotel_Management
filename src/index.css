@@ -16,3 +16,13 @@
 }
 
 body { font-family: 'Inter', sans-serif; }
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+.hide-scrollbar:hover{
+  scrollbar-width: block;
+}
