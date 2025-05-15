@@ -4,9 +4,7 @@ import { reservationsPourPageReservation } from "../../Data/reservations_noms";
 import * as React from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
-
 import { addDays } from "date-fns";
-
 import { cn } from "../../lib/utils";
 import { Button } from "../../Components/ui/button";
 import { Calendar } from "../../Components/ui/calendar";
@@ -16,14 +14,8 @@ import {
   PopoverTrigger,
 } from "../../Components/ui/popover";
 
-export function DatePickerWithRange({ className }) {
-  const [date, setDate] = React.useState({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
-  });
-
-  console.log("data", date);
-
+export function DatePickerWithRange({ className, setDate, date }) {
+  console.log(date);
   return (
     <div className={cn("grid gap-2 pt-3", className)}>
       <Popover>
@@ -98,7 +90,7 @@ function Tabs({ activeIndex, setActiveIndex, setStatus }) {
               activeIndex === index
                 ? "border-b border-green-600 text-green-600"
                 : ""
-            } mx-2`}
+            } mx-2 cursor-pointer hover:text-teal-600`}
           >
             {elem.elem}
           </li>
@@ -130,18 +122,38 @@ function AfficherTitreTableau() {
   );
 }
 
-const filterReservation = (status) => {
-  return status
-    ? reservationsPourPageReservation.filter(
-        (reservation) => reservation.status === status
-      )
-    : reservationsPourPageReservation;
+function ButtonNewReservation() {
+  return (
+    <button className="bg-blue-400 h-8 mt-3 mr-10 px-4 rounded-lg">
+      Nouvelle reservation +
+    </button>
+  );
+}
+
+const filterReservation = (status, date) => {
+  return reservationsPourPageReservation.filter((reservation) => {
+    const statusMatch = !status || reservation.status === status;
+    const reservDate = new Date(reservation.date);
+    const dateMatch =
+      !date?.from ||
+      !date?.to ||
+      (reservDate >= date.from && reservDate <= date.to);
+
+    return dateMatch && statusMatch;
+  });
 };
 
 function Reservation() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [status, setStatus] = useState("");
-  const reservationFiltree = filterReservation(status);
+
+  // Props DatePickerWithRange
+  const [date, setDate] = React.useState({
+    from: new Date(2025, 4, 1),
+    to: addDays(new Date(2025, 4, 30), 31),
+  });
+
+  const reservationFiltree = filterReservation(status, date);
 
   return (
     <div>
@@ -151,7 +163,10 @@ function Reservation() {
           activeIndex={activeIndex}
           setStatus={setStatus}
         />
-        <DatePickerWithRange />
+        <div className="flex gap-4">
+          <DatePickerWithRange setDate={setDate} date={date} />
+          <ButtonNewReservation />
+        </div>
       </div>
 
       <div className="mx-5 pr-5 pt-3">
