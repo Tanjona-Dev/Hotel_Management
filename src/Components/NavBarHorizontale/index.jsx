@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { LiensContext } from "../../utils/context";
-import { LogOut, Search } from "lucide-react";
 import { Link } from "react-router";
+import { LogOut, Search } from "lucide-react";
+import { LiensContext } from "../../utils/context";
 
 function NavBarHorizontale() {
   const { liens } = useContext(LiensContext);

@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { MoreVertical } from "lucide-react";
-import { reservationsPourPageReservation } from "../../Data/reservations_noms";
 import * as React from "react";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
 import { addDays } from "date-fns";
 import { cn } from "../../lib/utils";
+import { MoreVertical } from "lucide-react";
+import { LiensContext } from "../../utils/context";
 import { Button } from "../../Components/ui/button";
+import { useState, useContext, useEffect } from "react";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { reservationsPourPageReservation } from "../../Data/reservations_noms";
 import { Calendar } from "../../Components/ui/calendar";
 import {
   Popover,
@@ -154,6 +155,11 @@ function Reservation() {
   });
 
   const reservationFiltree = filterReservation(status, date);
+
+  const { setLiens } = useContext(LiensContext);
+  useEffect(() => {
+    setLiens("Commande");
+  }, [setLiens]);
 
   return (
     <div>

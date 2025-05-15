@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
+import { LiensContext } from "../../utils/context";
 import { reservation } from "../../Data/reservation";
 import {
   BarChart,
@@ -28,7 +30,7 @@ const Calendar = ({ setSelectedDay, setSelectMonth, setSelecteYear }) => {
 
   for (let d = 1; d <= daysInMonth; d++) {
     const dayStr = d.toString();
-    const isSelected = bgStyle === d
+    const isSelected = bgStyle === d;
     days.push(
       <div
         key={d}
@@ -36,10 +38,10 @@ const Calendar = ({ setSelectedDay, setSelectMonth, setSelecteYear }) => {
           setSelectedDay(dayStr);
           setSelectMonth(currentDate.month() + 1);
           setSelecteYear(currentDate.year());
-          setBgStyle(d)
+          setBgStyle(d);
         }}
         className={`p-2 rounded-lg text-center cursor-pointer hover:bg-blue-100 ${
-          isSelected ? 'bg-orange-200' : ''
+          isSelected ? "bg-orange-200" : ""
         }`}
       >
         {d}
@@ -192,7 +194,11 @@ const Jauge = ({
                 <div>{"Benefice Net"}</div>
               )}
             </h1>
-            {selectedDay && <h1>{beneficeNet < 0 ? '0' : beneficeNet.toLocaleString("fr-FR")} Ar</h1>}
+            {selectedDay && (
+              <h1>
+                {beneficeNet < 0 ? "0" : beneficeNet.toLocaleString("fr-FR")} Ar
+              </h1>
+            )}
           </div>
           <div className="w-50 bg-gray-400 rounded-lg">
             <div
@@ -318,6 +324,11 @@ function Calendrier() {
   const filteredReservations = selectedDay
     ? reservation.filter((res) => res.sejour.includes(dateRecherche))
     : reservation.filter((_, index) => index > reservation.length - 5);
+
+  const { setLiens } = useContext(LiensContext);
+  useEffect(() => {
+    setLiens("Calendrier");
+  }, [setLiens]);
 
   return (
     <div className="flex">

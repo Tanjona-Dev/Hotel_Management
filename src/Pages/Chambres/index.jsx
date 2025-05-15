@@ -6,6 +6,9 @@ import {
   MoreVertical,
 } from "lucide-react";
 import { chambresHotel } from "../../Data/liste_hotels";
+import { useEffect } from "react";
+import { LiensContext } from "../../utils/context";
+import { useContext } from "react";
 
 // La navitagtion Tout, Dispo, Reservees en bas-----
 function Tabs({ tabsStyle, setTabsStyle, setGetIndex, setfiltre }) {
@@ -98,6 +101,12 @@ function Chambres() {
     });
   };
   const chambreAftreFiltre = chambreFiltree();
+
+    const { setLiens } = useContext(LiensContext);
+    useEffect(() => {
+      setLiens("Chambres");
+    }, [setLiens]);
+  
 
   // Pagingantion
   const clientPerPage = 5;

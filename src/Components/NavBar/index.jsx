@@ -1,6 +1,4 @@
 import { Link } from "react-router";
-import { LiensContext } from "../../utils/context";
-import { useContext } from "react";
 import {
   Calendar,
   CheckCircle,
@@ -12,8 +10,10 @@ import {
   User,
   Users2Icon,
 } from "lucide-react";
+import { useState } from "react";
 
 function NavBar() {
+  const [bgColor, setBgcolor] = useState(null);
   const dashBordNavigation = [
     { name: "Tableau de bord", logo: <Home />, href: "/Dashbord" },
     { name: "Clients", logo: <User />, href: "/Clients" },
@@ -26,10 +26,8 @@ function NavBar() {
     { name: "Clients connectes", logo: <Users2Icon /> },
   ];
 
-  const { setLiens } = useContext(LiensContext);
-
-  function getLiensName(lienName) {
-    setLiens(lienName);
+  function bgControleColor(index) {
+    setBgcolor(index);
   }
 
   return (
@@ -39,8 +37,10 @@ function NavBar() {
           <Link
             to={`${nav.href}`}
             key={`${nav.name}-${index}`}
-            onClick={() => getLiensName(nav.name)}
-            className="font-semibold flex gap-5 focus:text-blue-600"
+            className={`font-semibold flex gap-5 ${
+              bgColor === index ? "text-blue-600" : ""
+            }`}
+            onClick={() => bgControleColor(index)}
           >
             {nav.logo}
             {nav.name}

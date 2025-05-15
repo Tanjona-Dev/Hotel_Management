@@ -1,8 +1,3 @@
-import dayjs from "dayjs";
-import styled from "styled-components";
-import { useState } from "react";
-import { ChambreReservee } from "../../Data";
-import StatistiqueReservation from "../../Components/Statistique";
 import {
   BedDouble,
   NotepadText,
@@ -11,7 +6,6 @@ import {
   Save,
   Verified,
 } from "lucide-react";
-import { appelRecents } from "../../Data";
 import {
   LineChart,
   Line,
@@ -19,7 +13,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { reservation } from "../../Data/reservation";
+import dayjs from "dayjs";
+import { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
+import { appelRecents } from "../../Data";
+import { ChambreReservee } from "../../Data";
+import { LiensContext } from "../../utils/context";
+import StatistiqueReservation from "../../Components/Statistique";
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
@@ -43,7 +43,7 @@ const Calendar = () => {
       <div
         key={d}
         onClick={() => {
-          setSelectedDay(d)
+          setSelectedDay(d);
         }}
         className={`p-2  rounded-lg text-center cursor-pointer 
           ${isSelected ? "bg-green-300" : "hover:bg-blue-100"}`}
@@ -75,10 +75,6 @@ const Calendar = () => {
     </div>
   );
 };
-
-const LundiDuMois = reservation.filter((reserv)=> {
-  reserv.sejour === ''
-})
 
 function AffichageChambreReservee() {
   return (
@@ -315,6 +311,10 @@ function AfficheAppelRecents() {
 }
 
 function Dashbord() {
+  const { setLiens } = useContext(LiensContext);
+  useEffect(() => {
+    setLiens("Tableau de bord");
+  }, [setLiens]);
   return (
     <div>
       <div>

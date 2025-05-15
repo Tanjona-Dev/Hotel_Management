@@ -1,35 +1,37 @@
-import { useEffect, useState } from "react";
-import { listeDesClients } from "../../Data/clients_hotel";
 import {
   ChevronsLeftIcon,
   ChevronsRightIcon,
   MoreVertical,
 } from "lucide-react";
-import styled from "styled-components";
-import * as React from "react";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { addDays } from "date-fns";
-import { cn } from "../../lib/utils";
-import { Button } from "../../Components/ui/button";
-import { Calendar } from "../../Components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "../../Components/ui/popover";
+import * as React from "react";
+import { format } from "date-fns";
+import { addDays } from "date-fns";
+import { useContext } from "react";
+import { cn } from "../../lib/utils";
+import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { LiensContext } from "../../utils/context";
+import { Button } from "../../Components/ui/button";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar } from "../../Components/ui/calendar";
+import { listeDesClients } from "../../Data/clients_hotel";
 
 export function DatePickerWithRange({ className, setDate, date }) {
   console.log(date);
   return (
-    <div className={cn("grid gap-2 pt-3", className)}>
+    <div className={cn("grid gap-2", className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant={"outline"}
             className={cn(
-              "w-[300px] justify-start text-left font-normal",
+              "w-[300px] justify-start text-left bg-green-300 font-normal",
               !date && "text-muted-foreground"
             )}
           >
@@ -48,7 +50,7 @@ export function DatePickerWithRange({ className, setDate, date }) {
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto p-0 bg-green-100" align="start">
           <Calendar
             initialFocus
             mode="range"
@@ -78,6 +80,7 @@ const getColor = (status) => {
   }
 };
 
+// FONCTION PRINCIPALE
 function Clients() {
   // STATES
   const [page, setPage] = useState(1);
@@ -92,6 +95,11 @@ function Clients() {
   useEffect(() => {
     setPage(1);
   }, [reservation]);
+
+  const { setLiens } = useContext(LiensContext);
+  useEffect(() => {
+    setLiens("Liste des clients");
+  }, [setLiens]);
 
   // --------------------------------FILTEER------------------------------------
 
@@ -122,7 +130,7 @@ function Clients() {
   return (
     // --------------BUTTONS FILTER EN BAS----------------------------------------------
     <div>
-      <div className="flex justify-between m-6 text-lg cursor-pointer pt-5">
+      <div className="flex justify-between m-6 text-lg cursor-pointer pt-2">
         <div className="flex justify-between gap-193 items-start">
           <div className="flex gap-5  border-b border-gray-300 w-115 pl-2 ">
             <div
