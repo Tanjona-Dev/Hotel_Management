@@ -8,7 +8,7 @@ function NavBarHorizontale() {
   return (
     <div>
       <div className="flex items-center py-5 mx-auto">
-        <h1 className="text-2xl font-bold mr-8">Stephen Hotel</h1>
+        <h1 className="text-3xl ml-5 playwrite opacity-90 border border-black/10">Tanjona Hotel</h1>
         <div className="flex items-center ml-17 w-100 font-bold text-2xl">
           {liens}
         </div>
