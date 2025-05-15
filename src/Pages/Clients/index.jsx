@@ -6,38 +6,61 @@ import {
   MoreVertical,
 } from "lucide-react";
 import styled from "styled-components";
+import * as React from "react";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { addDays } from "date-fns";
+import { cn } from "../../lib/utils";
+import { Button } from "../../Components/ui/button";
+import { Calendar } from "../../Components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../Components/ui/popover";
 
-function AfficheSelected({ mois, setMois }) {
+export function DatePickerWithRange({ className, setDate, date }) {
+  console.log(date);
   return (
-    <div>
-      <select
-        name=""
-        id=""
-        value={mois}
-        onChange={(e) => setMois(e.target.value)}
-      >
-        <option value="">Tous les Mois</option>
-        <option value="janv.">01 Janvier 2022 - 01 Fevrier 2022</option>
-        <option value="févr.">01 Fevrier 2022 - 01 Mars 2022</option>
-        <option value="mars">01 Mars 2022 - 01 Avril 2022</option>
-        <option value="avr.">01 Avril 2022 - 01 Mai 2022</option>
-        <option value="mai">01 Mai 2022 - 01 Juin 2022</option>
-        <option value="juin">01 Juin 2022 - 01 Juillet 2022</option>
-        <option value="juil.">01 Juillet 2022 - 01 Aout 2022</option>
-        <option value="août">01 Aout 2022 - 01 Septembre 2022</option>
-        <option value="sept.">01 Septembre 2022 - 01 Octobre 2022</option>
-        <option value="oct.">01 Octobre 2022 - 01 Novembre 2022</option>
-        <option value="nov.">01 Novembre 2022 - 01 Decembre 2022</option>
-        <option value="déc.">01 Decembre 2022 - 31 Decembre 2022</option>
-      </select>
+    <div className={cn("grid gap-2 pt-3", className)}>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            id="date"
+            variant={"outline"}
+            className={cn(
+              "w-[300px] justify-start text-left font-normal",
+              !date && "text-muted-foreground"
+            )}
+          >
+            <CalendarIcon />
+            {date?.from ? (
+              date.to ? (
+                <>
+                  {format(date.from, "LLL dd, y")} -{" "}
+                  {format(date.to, "LLL dd, y")}
+                </>
+              ) : (
+                format(date.from, "LLL dd, y")
+              )
+            ) : (
+              <span>Pick a date</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            initialFocus
+            mode="range"
+            defaultMonth={date?.from}
+            selected={date}
+            onSelect={setDate}
+            numberOfMonths={2}
+          />
+        </PopoverContent>
+      </Popover>
     </div>
   );
-}
-
-function getMonth(dateString) {
-  const date = new Date(dateString);
-  const month = date.toLocaleString("fr-Fr", { month: "short" });
-  return month;
 }
 
 const getColor = (status) => {
@@ -57,30 +80,34 @@ const getColor = (status) => {
 
 function Clients() {
   // STATES
-  const [mois, setMois] = useState("");
   const [page, setPage] = useState(1);
   const [reservation, setReservation] = useState("");
   const [requeteToggle, setRequeteToggle] = useState(null);
+  // state DatePickerWithRange
+  const [date, setDate] = React.useState({
+    from: new Date(2024, 10, 1),
+    to: addDays(new Date(2025, 0, 0), 31),
+  });
 
-  useEffect(() => {
-    setPage(1);
-  }, [mois]);
   useEffect(() => {
     setPage(1);
   }, [reservation]);
 
   // --------------------------------FILTEER------------------------------------
 
-  const filtrerListe = () => {
+  const filtrerListe = (date) => {
     return listeDesClients.filter((client) => {
-      const shortMonth = getMonth(client.arrive);
-      const matchMois = !mois || shortMonth === mois;
       const matchReservation =
         !reservation || reservation === client.etatReservation;
-      return matchMois && matchReservation;
+      const dateCommande = new Date(client.commande);
+      const dateMatch =
+        !date?.from ||
+        !date?.to ||
+        (dateCommande >= date.from && dateCommande <= date.to);
+      return matchReservation && dateMatch;
     });
   };
-  const listesClientFiltrer = filtrerListe();
+  const listesClientFiltrer = filtrerListe(date);
 
   // ----------------------------PAGINATION--------------------------------------------
 
@@ -96,48 +123,50 @@ function Clients() {
     // --------------BUTTONS FILTER EN BAS----------------------------------------------
     <div>
       <div className="flex justify-between m-6 text-lg cursor-pointer pt-5">
-        <div className="flex gap-5  border-b border-gray-300 w-115 pl-2 ">
-          <div
-            className={`${
-              !reservation ? "border-b-3 border-teal-400 transition" : ""
-            }`}
-          >
-            <h1 onClick={() => setReservation("")}>Tout</h1>
+        <div className="flex justify-between gap-193 items-start">
+          <div className="flex gap-5  border-b border-gray-300 w-115 pl-2 ">
+            <div
+              className={`${
+                !reservation ? "border-b-3 border-teal-400 transition" : ""
+              }`}
+            >
+              <h1 onClick={() => setReservation("")}>Tout</h1>
+            </div>
+            <div
+              className={`${
+                reservation === "En attente" &&
+                "border-b-3  border-teal-400 transition"
+              }`}
+            >
+              <h1 onClick={() => setReservation("En attente")}>En attente</h1>
+            </div>
+            <div
+              className={`${
+                reservation === "Réservé" &&
+                "border-b-3  border-teal-400 transition"
+              }`}
+            >
+              <h1 onClick={() => setReservation("Réservé")}>Réservé</h1>
+            </div>
+            <div
+              className={`${
+                reservation === "Annulé" &&
+                "border-b-3  border-teal-400 transition"
+              }`}
+            >
+              <h1 onClick={() => setReservation("Annulé")}>Annulé</h1>
+            </div>
+            <div
+              className={`${
+                reservation === "Remboursé" &&
+                "border-b-3 border-teal-400 transition"
+              }`}
+            >
+              <h1 onClick={() => setReservation("Remboursé")}>Remboursé</h1>
+            </div>
           </div>
-          <div
-            className={`${
-              reservation === "En attente" &&
-              "border-b-3  border-teal-400 transition"
-            }`}
-          >
-            <h1 onClick={() => setReservation("En attente")}>En attente</h1>
-          </div>
-          <div
-            className={`${
-              reservation === "Réservé" &&
-              "border-b-3  border-teal-400 transition"
-            }`}
-          >
-            <h1 onClick={() => setReservation("Réservé")}>Réservé</h1>
-          </div>
-          <div
-            className={`${
-              reservation === "Annulé" &&
-              "border-b-3  border-teal-400 transition"
-            }`}
-          >
-            <h1 onClick={() => setReservation("Annulé")}>Annulé</h1>
-          </div>
-          <div
-            className={`${
-              reservation === "Remboursé" &&
-              "border-b-3 border-teal-400 transition"
-            }`}
-          >
-            <h1 onClick={() => setReservation("Remboursé")}>Remboursé</h1>
-          </div>
+          <DatePickerWithRange setDate={setDate} date={date} />
         </div>
-        <div>{<AfficheSelected mois={mois} setMois={setMois} />}</div>
       </div>
 
       {/*----------- MAPER LA LISTE FILTREE EN BAS------------------------------------------------- */}

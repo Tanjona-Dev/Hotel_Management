@@ -25,7 +25,7 @@ function NavBarHorizontale() {
         </div>
         <div>
           <Link to={`/`}>
-          <LogOut className="mr-8 cursor-pointer" color="gray" />
+            <LogOut className="mr-8 cursor-pointer" color="gray" />
           </Link>
         </div>
       </div>
