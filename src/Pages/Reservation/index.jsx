@@ -175,8 +175,8 @@ function Reservation() {
         </div>
       </div>
 
-      <div className="mx-5 pr-5 pt-3">
-        <table className=" w-full border-collapse m-5 mx-3 shadow-xl rounded-lg">
+      <div className=" pt-3 h-202 overflow-y-scroll scroll-on-hover">
+        <table className="w-392 border-collapse m-5 shadow-xl rounded-lg">
           <thead>
             <AfficherTitreTableau />
           </thead>
