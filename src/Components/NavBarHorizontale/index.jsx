@@ -1,14 +1,17 @@
 import { useContext } from "react";
 import { Link } from "react-router";
-import { LogOut, Search } from "lucide-react";
+import { LogOut, Search, Star } from "lucide-react";
 import { LiensContext } from "../../utils/context";
+import LogoHotel from "../../assets/logoHotel.png"
 
 function NavBarHorizontale() {
   const { liens } = useContext(LiensContext);
   return (
     <div>
-      <div className="flex items-center py-5 mx-auto">
-        <h1 className="text-3xl ml-5 playwrite opacity-90 border border-black/10">Tanjona Hotel</h1>
+      <div className="flex items-center py-3 mx-auto">
+        <div>
+            <img src={LogoHotel} alt="" className="w-20 h-18 ml-10 mr-22" />
+        </div>
         <div className="flex items-center ml-17 w-100 font-bold text-2xl">
           {liens}
         </div>

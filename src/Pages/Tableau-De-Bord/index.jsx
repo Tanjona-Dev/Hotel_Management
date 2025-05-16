@@ -54,7 +54,7 @@ const Calendar = () => {
   }
 
   return (
-    <div className="w-100 mx-auto h-90 p-4">
+    <div className="w-100 mx-auto h-85 p-4">
       <div className="flex justify-between items-center mb-4">
         <button onClick={prevMonth} className="text-orange-500 hover:underline">
           ← Mois précédent

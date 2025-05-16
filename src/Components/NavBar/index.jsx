@@ -32,7 +32,7 @@ function NavBar() {
 
   return (
     <div>
-      <ul className="flex flex-col gap-5">
+      <ul className="flex flex-col gap-7">
         {dashBordNavigation.map((nav, index) => (
           <Link
             to={`${nav.href}`}
