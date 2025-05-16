@@ -5,10 +5,10 @@ import { cn } from "../../lib/utils";
 import { MoreVertical } from "lucide-react";
 import { LiensContext } from "../../utils/context";
 import { Button } from "../../Components/ui/button";
-import { useState, useContext, useEffect } from "react";
 import { Calendar as CalendarIcon } from "lucide-react";
-import { reservationsPourPageReservation } from "../../Data/reservations_noms";
+import { useState, useContext, useEffect } from "react";
 import { Calendar } from "../../Components/ui/calendar";
+import { reservationsPourPageReservation } from "../../Data/reservations_noms";
 import {
   Popover,
   PopoverContent,
@@ -125,8 +125,12 @@ function AfficherTitreTableau() {
 
 function ButtonNewReservation() {
   return (
-    <button className="bg-blue-400 h-8 mt-3 mr-10 px-4 rounded-lg">
+    <button
+      className="group text-white/80 relative overflow-hidden bg-blue-400  h-8 mt-3 mr-10 px-4 
+    rounded-lg transform transition-all duration-300 hover:scale-101 hover:shadow-sm"
+    >
       Nouvelle reservation +
+      <span className="absolute inset-0 bg-white opacity-10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
     </button>
   );
 }
