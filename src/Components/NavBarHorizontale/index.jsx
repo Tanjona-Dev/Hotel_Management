@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router";
-import { LogOut, Search, Star } from "lucide-react";
+import { LogOut, Search } from "lucide-react";
 import { LiensContext } from "../../utils/context";
 import LogoHotel from "../../assets/logoHotel.png"
 
@@ -23,6 +23,7 @@ function NavBarHorizontale() {
           <input
             type="text"
             placeholder="Recherche..."
+            id="recherche"
             className="pl-10 pr-4 py-2  rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64 bg-gray-200"
           />
         </div>

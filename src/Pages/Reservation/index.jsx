@@ -2,18 +2,19 @@ import * as React from "react";
 import { format } from "date-fns";
 import { addDays } from "date-fns";
 import { cn } from "../../lib/utils";
-import { MoreVertical } from "lucide-react";
 import { LiensContext } from "../../utils/context";
 import { Button } from "../../Components/ui/button";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { useState, useContext, useEffect } from "react";
 import { Calendar } from "../../Components/ui/calendar";
+import { Archive, Factory, Files, MoreVertical, Plus } from "lucide-react";
 import { reservationsPourPageReservation } from "../../Data/reservations_noms";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "../../Components/ui/popover";
+import { Link } from "react-router";
 
 export function DatePickerWithRange({ className, setDate, date }) {
   console.log(date);
@@ -125,13 +126,15 @@ function AfficherTitreTableau() {
 
 function ButtonNewReservation() {
   return (
-    <button
-      className="group text-white/80 relative overflow-hidden bg-blue-400  h-8 mt-3 mr-10 px-4 
+    <Link to={`/NouvelleReservation`}>
+      <button
+        className="group text-white/80 relative overflow-hidden bg-blue-400  h-8 mt-3 mr-10 px-4 
     rounded-lg transform transition-all duration-300 hover:scale-101 hover:shadow-sm"
-    >
-      Nouvelle reservation +
-      <span className="absolute inset-0 bg-white opacity-10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
-    </button>
+      >
+        Nouvelle reservation +
+        <span className="absolute inset-0 bg-white opacity-10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></span>
+      </button>
+    </Link>
   );
 }
 
@@ -151,6 +154,8 @@ const filterReservation = (status, date) => {
 function Reservation() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [status, setStatus] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [getIndex, setGetIndex] = useState(null);
 
   // Props DatePickerWithRange
   const [date, setDate] = React.useState({
@@ -179,7 +184,7 @@ function Reservation() {
         </div>
       </div>
 
-      <div className=" pt-3 h-202 overflow-y-scroll scroll-on-hover">
+      <div className=" pt-3 h-202 overflow-y-scroll scroll-on-hover transition-scroll">
         <table className="w-392 border-collapse m-5 shadow-xl rounded-lg">
           <thead>
             <AfficherTitreTableau />
@@ -217,8 +222,56 @@ function Reservation() {
                       {reservation.status}
                     </div>
                   </td>
-                  <td className="pl-10">
-                    <MoreVertical size={15} />
+                  <td className="pl-10 relative">
+                    <MoreVertical
+                      size={15}
+                      onClick={() => {
+                        setIsOpen(!isOpen);
+                        setGetIndex(index);
+                      }}
+                    />
+                    <div>
+                      {isOpen ||
+                        (getIndex === index && (
+                          <div className=" z-100 absolute w-45 right-3.5 flex flex-col gap-3 bg-white/70 p-2 justify-center rounded  ">
+                            <div className="flex gap-2 text-sm">
+                              {" "}
+                              <Files size={20} />
+                              <h1 className=" hover:bg-orange-200 hover:shadow-xl px-1 rounded-sm">
+                                Details
+                              </h1>
+                            </div>
+                            <div className="flex gap-2">
+                              {" "}
+                              <Factory size={20} />
+                              <h1 className=" hover:bg-orange-200 hover:shadow-xl  px-1 rounded-sm">
+                                {" "}
+                                Voir les factures
+                              </h1>
+                            </div>
+                            <div className="flex gap-2">
+                              {" "}
+                              <Plus size={20} />
+                              <h1 className=" hover:bg-orange-200 hover:shadow-xl rounded-sm">
+                                {" "}
+                                Ajouter une facture
+                              </h1>
+                            </div>
+                            <div className="flex gap-2">
+                              <Files size={20} />
+                              <h1 className=" hover:bg-orange-200 hover:shadow-xl  px-1 rounded-sm">
+                                Modifier
+                              </h1>
+                            </div>
+                            <div className="flex gap-2">
+                              <Archive size={20} />
+                              <h1 className=" hover:bg-orange-200 hover:shadow-xl  px-1 rounded-sm">
+                                Archiver
+                              </h1>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
                   </td>
                 </tr>
               );

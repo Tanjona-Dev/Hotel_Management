@@ -10,7 +10,8 @@ import {
   User,
   Users2Icon,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { LiensContext } from "../../utils/context";
 
 function NavBar() {
   const [bgColor, setBgcolor] = useState(null);
@@ -25,10 +26,26 @@ function NavBar() {
     { name: "Appels", logo: <Phone /> },
     { name: "Clients connectes", logo: <Users2Icon /> },
   ];
+  const { liens } = useContext(LiensContext);
 
-  function bgControleColor(index) {
-    setBgcolor(index);
-  }
+  
+  useEffect(() => {
+    if (liens === "Tableau de bord") {
+      setBgcolor(0);
+    }
+    if (liens === "Liste des clients") {
+      setBgcolor(1);
+    }
+    if (liens === "Chambres") {
+      setBgcolor(2);
+    }
+    if (liens === "Calendrier") {
+      setBgcolor(3);
+    }
+    if (liens === "Commande") {
+      setBgcolor(4);
+    }
+  }, [liens]);
 
   return (
     <div>
@@ -40,7 +57,6 @@ function NavBar() {
             className={`font-semibold flex gap-5 ${
               bgColor === index ? "text-blue-600" : ""
             }`}
-            onClick={() => bgControleColor(index)}
           >
             {nav.logo}
             {nav.name}

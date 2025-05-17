@@ -7,6 +7,7 @@ import MainLayout from "./Components/Navigation/MainLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Calendrier from "./Pages/Calendrier";
 import Reservation from "./Pages/Reservation";
+import NouvelleReservation from "./Pages/Reservation/nouvelleReservation";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
               <Route path="/Chambres" element={<Chambres />} />
               <Route path="/Calendrier" element={<Calendrier />} />
               <Route path="/Reservation" element={<Reservation />} />
+              <Route
+                path="/NouvelleReservation"
+                element={<NouvelleReservation />}
+              />
             </Route>
           </Routes>
         </LiensProvider>
