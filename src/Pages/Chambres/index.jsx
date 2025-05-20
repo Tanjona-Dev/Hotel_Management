@@ -204,7 +204,6 @@ function Chambres() {
             disabled={page === totalePage}
             className="disabled:opacity-50"
           >
-            {console.log(totalePage)}
             <ChevronRightCircle
               size={40}
               color="green"

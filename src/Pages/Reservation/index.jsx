@@ -1,3 +1,9 @@
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "../../Components/ui/popover";
+import { Link } from "react-router";
 import * as React from "react";
 import { format } from "date-fns";
 import { addDays } from "date-fns";
@@ -9,15 +15,8 @@ import { useState, useContext, useEffect } from "react";
 import { Calendar } from "../../Components/ui/calendar";
 import { Archive, Factory, Files, MoreVertical, Plus } from "lucide-react";
 import { reservationsPourPageReservation } from "../../Data/reservations_noms";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../Components/ui/popover";
-import { Link } from "react-router";
 
 export function DatePickerWithRange({ className, setDate, date }) {
-  console.log(date);
   return (
     <div className={cn("grid gap-2 pt-3", className)}>
       <Popover>
@@ -237,17 +236,22 @@ function Reservation() {
                             <div className="flex gap-2 text-sm">
                               {" "}
                               <Files size={20} />
-                              <h1 className=" hover:bg-orange-200 hover:shadow-xl px-1 rounded-sm">
+                              <Link
+                                to={`/detail-reservation/${reservation.id}`}
+                                className=" hover:bg-orange-200 hover:shadow-xl px-1 rounded-sm"
+                              >
                                 Details
-                              </h1>
+                              </Link>
                             </div>
-                            <div className="flex gap-2">
-                              {" "}
-                              <Factory size={20} />
-                              <h1 className=" hover:bg-orange-200 hover:shadow-xl  px-1 rounded-sm">
+                            <div >
+                              <Link to={`/facture-reservation`} className="flex gap-2">
                                 {" "}
-                                Voir les factures
-                              </h1>
+                                <Factory size={20} />
+                                <h1 className=" hover:bg-orange-200 hover:shadow-xl  px-1 rounded-sm">
+                                  {" "}
+                                  Voir les factures
+                                </h1>
+                              </Link>
                             </div>
                             <div className="flex gap-2">
                               {" "}

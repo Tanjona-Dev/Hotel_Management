@@ -4,9 +4,14 @@ import Chambres from "./Pages/Chambres";
 import Calendrier from "./Pages/Calendrier";
 import Reservation from "./Pages/Reservation";
 import Dashbord from "./Pages/Tableau-De-Bord";
+import "react-toastify/dist/ReactToastify.css";
 import { LiensProvider } from "./utils/context";
+import { ToastContainer } from "react-toastify";
+import DetailsReservation from "./Pages/DetailsReservation";
 import MainLayout from "./Components/Navigation/MainLayout";
+import { DetailsClientsProfileProvider } from "./utils/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
+import ReservationFacture from "./Pages/Reservation/reservationFacture";
 import NouvelleReservation from "./Pages/Reservation/nouvelleReservation";
 
 function App() {
@@ -14,20 +19,31 @@ function App() {
     <>
       <Router>
         <LiensProvider>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route element={<MainLayout />}>
-              <Route path="/Dashbord" element={<Dashbord />} />
-              <Route path="/Clients" element={<Clients />} />
-              <Route path="/Chambres" element={<Chambres />} />
-              <Route path="/Calendrier" element={<Calendrier />} />
-              <Route path="/Reservation" element={<Reservation />} />
-              <Route
-                path="/NouvelleReservation"
-                element={<NouvelleReservation />}
-              />
-            </Route>
-          </Routes>
+          <DetailsClientsProfileProvider>
+            <ToastContainer position="top-center" />
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route element={<MainLayout />}>
+                <Route path="/Dashbord" element={<Dashbord />} />
+                <Route path="/Clients" element={<Clients />} />
+                <Route path="/Chambres" element={<Chambres />} />
+                <Route path="/Calendrier" element={<Calendrier />} />
+                <Route path="/Reservation" element={<Reservation />} />
+                <Route
+                  path="/NouvelleReservation"
+                  element={<NouvelleReservation />}
+                />
+                <Route
+                  path="/detail-reservation/:id"
+                  element={<DetailsReservation />}
+                />
+                <Route
+                  path="/facture-reservation"
+                  element={<ReservationFacture />}
+                />
+              </Route>
+            </Routes>
+          </DetailsClientsProfileProvider>
         </LiensProvider>
       </Router>
     </>

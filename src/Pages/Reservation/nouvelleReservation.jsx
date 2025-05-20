@@ -1,34 +1,102 @@
-import { Calendar, Check } from "lucide-react";
-import { useContext, useEffect, useState } from "react";
-import { LiensContext } from "../../utils/context";
-import { reservationsPourPageReservation } from "../../Data/reservations_noms";
-
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css"; // CSS obligatoire
 import { format } from "date-fns";
+import { toast } from "react-toastify";
+import "react-day-picker/dist/style.css";
+import { DayPicker } from "react-day-picker";
+import { Calendar, Check } from "lucide-react";
+import { LiensContext } from "../../utils/context";
+import { useContext, useEffect, useRef, useState } from "react";
+import { reservationsPourPageReservation } from "../../Data/reservations_noms";
+import { useClickOutside } from "../../utils/Hooks/outSideClick";
 
 function createAndPushNewReservation(newReservation) {
   console.log(newReservation);
   // CREATE ID
   const nouvelleID = Math.max(
     0,
-    ...(reservationsPourPageReservation.map((reserv) => reserv.id) + 1)
+    ...reservationsPourPageReservation.map((reserv) => reserv.id + 1)
   );
   // NOUVELLE RESERVATION
   const reservationtoAdd = {
     id: nouvelleID,
+    nom: newReservation.nom,
     typeChambre: newReservation.typeChambre,
     nombre: newReservation.nombre,
+    date: newReservation.date,
+    depart: newReservation.depart,
+    arrive: newReservation.arrive,
+    status: newReservation.status,
   };
   console.log(reservationtoAdd);
+
   return reservationtoAdd;
 }
 
-function MyDatePicker() {
+// DATEPICKER
+function MyDatePicker({ setDateDeReservation, setReservationCalendar }) {
   const [selectedDate, setSelectedDate] = useState();
+  useEffect(() => {
+    selectedDate &&
+      (setDateDeReservation(selectedDate), setReservationCalendar(false));
+  }, [selectedDate, setDateDeReservation, setReservationCalendar]);
+
+  // RECUPERER LES CLIQUES EN DEHORS DU CALENDRIER
+  const refReservation = useRef(null);
+  useEffect(() => {
+    const outsideClick = (e) => {
+      if (
+        refReservation.current &&
+        !refReservation.current.contains(e.target)
+      ) {
+        setReservationCalendar(false);
+      }
+    };
+    document.addEventListener("mousedown", outsideClick);
+  }, [setReservationCalendar]);
 
   return (
-    <div>
+    <div ref={refReservation}>
+      <DayPicker
+        mode="single"
+        selected={selectedDate}
+        onSelect={setSelectedDate}
+      />
+      {selectedDate && (
+        <p>Date sélectionnée : {format(selectedDate, "dd/MM/yyyy")}</p>
+      )}
+    </div>
+  );
+}
+function MyDatePickerDepart({ setDateDeDepart, setDepartCalendar }) {
+  const [selectedDate, setSelectedDate] = useState();
+  useEffect(() => {
+    selectedDate && (setDateDeDepart(selectedDate), setDepartCalendar(false));
+  }, [selectedDate, setDateDeDepart, setDepartCalendar]);
+  const refDepart = useRef(null);
+  useClickOutside(refDepart, () => setDepartCalendar(false));
+  return (
+    <div ref={refDepart}>
+      <DayPicker
+        mode="single"
+        selected={selectedDate}
+        onSelect={setSelectedDate}
+      />
+      {selectedDate && (
+        <p>Date sélectionnée : {format(selectedDate, "dd/MM/yyyy")}</p>
+      )}
+    </div>
+  );
+}
+
+function MyDatePickerArrive({ setDateArrivee, setArriveeCalendar }) {
+  const [selectedDate, setSelectedDate] = useState();
+  useEffect(() => {
+    selectedDate && (setDateArrivee(selectedDate), setArriveeCalendar(false));
+  }, [selectedDate, setDateArrivee, setArriveeCalendar]);
+
+  const refArrive = useRef(null);
+  useClickOutside(refArrive, () => setArriveeCalendar(false));
+  return (
+    <div ref={refArrive}>
       <DayPicker
         mode="single"
         selected={selectedDate}
@@ -45,12 +113,46 @@ function MyDatePicker() {
 export default function NouvelleReservation() {
   const [newReservation, setNewReservation] = useState({});
   const [reservationCalendar, setReservationCalendar] = useState(false);
+  const [dateDeReservation, setDateDeReservation] = useState("");
   const [departCalendar, setDepartCalendar] = useState(false);
+  const [dateDeDepart, setDateDeDepart] = useState("");
   const [arriveeCalendar, setArriveeCalendar] = useState(false);
+  const [dateArrivee, setDateArrivee] = useState("");
+
+  useEffect(() => {
+    const reservationDay = dateDeReservation && new Date(dateDeReservation);
+    const reservationDateString =
+      reservationDay && reservationDay.toISOString().split("T")[0];
+    reservationDateString &&
+      setNewReservation((prev) => ({ ...prev, date: reservationDateString }));
+  }, [dateDeReservation]);
+
+  useEffect(() => {
+    const departDay = dateDeDepart && new Date(dateDeDepart);
+    const departDateString = departDay && departDay.toISOString().split("T")[0];
+    setNewReservation((prev) => ({ ...prev, depart: departDateString }));
+  }, [dateDeDepart]);
+
+  useEffect(() => {
+    const arriveDay = dateArrivee && new Date(dateArrivee);
+    const arrivDateString = arriveDay && arriveDay.toISOString().split("T")[0];
+    setNewReservation((prev) => ({ ...prev, arrive: arrivDateString }));
+  }, [dateArrivee]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    createAndPushNewReservation(newReservation);
+    const resultatFinal = createAndPushNewReservation(newReservation);
+
+    const toastOnSubmit = () => {
+      return toast.success(`
+        id: ${resultatFinal.id}
+        Nom: ${resultatFinal.nom}
+        Type de chambre : ${resultatFinal.typeChambre}
+        arrive : ${resultatFinal.arrive}
+        status : ${resultatFinal.status}
+        `);
+    };
+    toastOnSubmit();
   }
 
   const { setLiens } = useContext(LiensContext);
@@ -72,6 +174,14 @@ export default function NouvelleReservation() {
   const nomsDesClients = reservationsPourPageReservation.reduce(
     (acc, reservation) => {
       acc.includes(reservation.nom) ? acc : acc.push(reservation.nom);
+      return acc;
+    },
+    []
+  );
+  // REDUIRE LES DOUBLOUNS DES STATUS DE PAYEMENT
+  const paymentStatus = reservationsPourPageReservation.reduce(
+    (acc, reservation) => {
+      acc.includes(reservation.status) ? acc : acc.push(reservation.status);
       return acc;
     },
     []
@@ -182,11 +292,17 @@ export default function NouvelleReservation() {
                 </span>
                 {reservationCalendar && (
                   <span className="absolute bg-green-100 left-73 top-17 rounded-lg z-10">
-                    {<MyDatePicker />}
+                    {
+                      <MyDatePicker
+                        setDateDeReservation={setDateDeReservation}
+                        setReservationCalendar={setReservationCalendar}
+                      />
+                    }
                   </span>
                 )}
               </div>
             </div>
+            {/* ARRIVE */}
             <div className="flex gap-5">
               <div className="flex flex-col gap-1 relative">
                 <label htmlFor="arrivee" className="font-bold">
@@ -206,7 +322,12 @@ export default function NouvelleReservation() {
                 </span>
                 {arriveeCalendar && (
                   <span className="absolute bg-green-100 left-73 top-17 rounded-lg z-10">
-                    {<MyDatePicker />}
+                    {
+                      <MyDatePickerArrive
+                        setDateArrivee={setDateArrivee}
+                        setArriveeCalendar={setArriveeCalendar}
+                      />
+                    }
                   </span>
                 )}
               </div>
@@ -228,7 +349,12 @@ export default function NouvelleReservation() {
                 </span>
                 {departCalendar && (
                   <span className="absolute bg-green-100 top-141 left-351 rounded-lg">
-                    {<MyDatePicker />}
+                    {
+                      <MyDatePickerDepart
+                        setDateDeDepart={setDateDeDepart}
+                        setDepartCalendar={setDepartCalendar}
+                      />
+                    }
                   </span>
                 )}
               </div>
@@ -241,13 +367,24 @@ export default function NouvelleReservation() {
                 name=""
                 id="status"
                 className="w-305 border rounded shadow  h-10"
+                value={newReservation.status || ""}
+                onChange={(e) =>
+                  setNewReservation((prev) => ({
+                    ...prev,
+                    status: e.target.value,
+                  }))
+                }
               >
-                <option value="">En cours</option>
+                <option value="">Status</option>
+                {paymentStatus.map((status, index) => (
+                  <option value={status} key={`${status}-${index}`}>
+                    {status}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
               <button
-                onClick={() => console.log("yes")}
                 type="submit"
                 className="flex justify-center gap-3 shadow-lg shadow-green-100 bg-green-700 w-305 p-1 rounded hover:bg-green-600 text-white "
               >
