@@ -1,4 +1,4 @@
-import { Computer, Folder, Printer } from "lucide-react";
+import { Folder, Printer } from "lucide-react";
 import { reservationsPourPageReservation } from "../../Data/reservations_noms";
 
 function ReservationFacture() {

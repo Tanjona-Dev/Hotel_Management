@@ -1,5 +1,6 @@
 import Login from "./Pages/Login";
 import Clients from "./Pages/Clients";
+import Factures from "./Pages/Factures";
 import Chambres from "./Pages/Chambres";
 import Calendrier from "./Pages/Calendrier";
 import Reservation from "./Pages/Reservation";
@@ -41,6 +42,7 @@ function App() {
                   path="/facture-reservation"
                   element={<ReservationFacture />}
                 />
+                <Route path="/Factures" element={<Factures />} />
               </Route>
             </Routes>
           </DetailsClientsProfileProvider>

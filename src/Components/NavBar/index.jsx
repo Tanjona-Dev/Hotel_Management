@@ -10,8 +10,8 @@ import {
   User,
   Users2Icon,
 } from "lucide-react";
-import { useState, useContext, useEffect } from "react";
 import { LiensContext } from "../../utils/context";
+import { useState, useContext, useEffect } from "react";
 
 function NavBar() {
   const [bgColor, setBgcolor] = useState(null);
@@ -21,14 +21,13 @@ function NavBar() {
     { name: "Chambres", logo: <DoorClosed />, href: "/Chambres" },
     { name: "Calendrier", logo: <Calendar />, href: "/Calendrier" },
     { name: "Reservations", logo: <CheckCircle />, href: "/Reservation" },
-    { name: "Factures", logo: <FileText /> },
+    { name: "Factures", logo: <FileText />, href: "/Factures" },
     { name: "Checkout", logo: <ShoppingBag /> },
     { name: "Appels", logo: <Phone /> },
     { name: "Clients connectes", logo: <Users2Icon /> },
   ];
   const { liens } = useContext(LiensContext);
 
-  
   useEffect(() => {
     if (liens === "Tableau de bord") {
       setBgcolor(0);
@@ -45,6 +44,9 @@ function NavBar() {
     if (liens === "Commande") {
       setBgcolor(4);
     }
+    if (liens === "Factures") {
+      setBgcolor(5);
+    }
   }, [liens]);
 
   return (
@@ -54,8 +56,10 @@ function NavBar() {
           <Link
             to={`${nav.href}`}
             key={`${nav.name}-${index}`}
-            className={`font-semibold flex gap-5 ${
-              bgColor === index ? "text-blue-600" : ""
+            className={`font-semibold flex gap-5 hover:scale-101 transition-all ${
+              bgColor === index
+                ? "text-blue-600 bg-blue-100 rounded-full p-1 shadow"
+                : ""
             }`}
           >
             {nav.logo}

@@ -283,6 +283,13 @@ export default function NouvelleReservation() {
                   className="w-150 border  h-10 rounded shadow"
                   placeholder="jj/mm/aaaa"
                   id="reservation"
+                  value={
+                    dateDeReservation
+                      ? format(new Date(dateDeReservation), "dd/MM/yyyy")
+                      : ""
+                  }
+                  readOnly
+                  onClick={() => setReservationCalendar(!reservationCalendar)}
                 />
                 <span
                   onClick={() => setReservationCalendar(!reservationCalendar)}
@@ -313,6 +320,13 @@ export default function NouvelleReservation() {
                   className="w-150 border  h-10 rounded shadow"
                   placeholder="jj/mm/aaaa"
                   id="arrivee"
+                  value={
+                    dateArrivee
+                      ? format(new Date(dateArrivee), "dd/MM/yyyy")
+                      : ""
+                  }
+                  readOnly
+                  onClick={() => setArriveeCalendar(!arriveeCalendar)}
                 />
                 <span
                   onClick={() => setArriveeCalendar(!arriveeCalendar)}
@@ -340,6 +354,13 @@ export default function NouvelleReservation() {
                   placeholder="jj/mm/aaaa"
                   className="relative w-150 border  h-10 rounded shadow"
                   id="depart"
+                  value={
+                    dateDeDepart
+                      ? format(new Date(dateDeDepart), "dd/MM/yyyy")
+                      : ""
+                  }
+                  readOnly
+                  onClick={() => setDepartCalendar(!departCalendar)}
                 />
                 <span
                   onClick={() => setDepartCalendar(!departCalendar)}

@@ -102,11 +102,10 @@ function Chambres() {
   };
   const chambreAftreFiltre = chambreFiltree();
 
-    const { setLiens } = useContext(LiensContext);
-    useEffect(() => {
-      setLiens("Chambres");
-    }, [setLiens]);
-  
+  const { setLiens } = useContext(LiensContext);
+  useEffect(() => {
+    setLiens("Chambres");
+  }, [setLiens]);
 
   // Pagingantion
   const clientPerPage = 5;
