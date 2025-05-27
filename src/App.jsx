@@ -10,6 +10,7 @@ import { LiensProvider } from "./utils/context";
 import { ToastContainer } from "react-toastify";
 import DetailsReservation from "./Pages/DetailsReservation";
 import MainLayout from "./Components/Navigation/MainLayout";
+import NouvelleFacture from "./Pages/Factures/nouvelleFacture";
 import { DetailsClientsProfileProvider } from "./utils/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import ReservationFacture from "./Pages/Reservation/reservationFacture";
@@ -43,6 +44,7 @@ function App() {
                   element={<ReservationFacture />}
                 />
                 <Route path="/Factures" element={<Factures />} />
+                <Route path="/nouvelle-facture" element={<NouvelleFacture />} />
               </Route>
             </Routes>
           </DetailsClientsProfileProvider>

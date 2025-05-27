@@ -1,6 +1,7 @@
-import { Check, Mail, Plus, Printer } from "lucide-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, Mail, Plus, Printer } from "lucide-react";
 import { reservationsPourPageReservation } from "../../Data/reservations_noms";
+import { Link } from "react-router";
 
 export function AfficherTableau({ page, setPage }) {
   const clientPerPage = 6;
@@ -40,11 +41,14 @@ export function AfficherTableau({ page, setPage }) {
         <h1 className="border-b-2 border-green-600 w-15 text-center m-4">
           Tout
         </h1>
-        <button className="flex gap-2 items-center px-5 bg-green-700 h-9 mt-3 mr-5 rounded-lg text-white cursor-pointer relative group overflow-hidden hover:scale-101 hover:shadow-lg transition duration-300">
+        <Link
+          to={`/nouvelle-facture`}
+          className="flex gap-2 items-center px-5 bg-green-700 h-9 mt-3 mr-5 rounded-lg text-white cursor-pointer relative group overflow-hidden hover:scale-101 hover:shadow-lg transition duration-300"
+        >
           Nouvelle facture{" "}
           <Plus size={18} className="group-hover:animate-spin" />
           <span className="absolute inset-0 bg-white opacity-9 -translate-x-full w-[100%] group-hover:translate-x-0 transition-all duration-500 ease-out"></span>
-        </button>
+        </Link>
       </div>
       <div className="m-5 bg-white rounded-lg h-180 overflow-hidden">
         <table className=" w-full ">
