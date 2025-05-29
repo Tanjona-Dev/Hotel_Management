@@ -103,12 +103,12 @@ export function AfficherTableau({ page, setPage }) {
                         <h1 className="text-sm">Imprimer</h1>
                         <Printer size={18} />
                       </button>
-                      <button>
+                      <Link to={`/addFacture/${reservation.reference}`}>
                         <Plus
                           color="gray"
                           className="hover:animate-pulse cursor-pointer"
                         />
-                      </button>
+                      </Link>
                     </div>
                   </td>
                 </tr>

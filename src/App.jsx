@@ -8,6 +8,7 @@ import Dashbord from "./Pages/Tableau-De-Bord";
 import "react-toastify/dist/ReactToastify.css";
 import { LiensProvider } from "./utils/context";
 import { ToastContainer } from "react-toastify";
+import AddFacture from "./Pages/Factures/addFacture";
 import DetailsReservation from "./Pages/DetailsReservation";
 import MainLayout from "./Components/Navigation/MainLayout";
 import NouvelleFacture from "./Pages/Factures/nouvelleFacture";
@@ -45,6 +46,7 @@ function App() {
                 />
                 <Route path="/Factures" element={<Factures />} />
                 <Route path="/nouvelle-facture" element={<NouvelleFacture />} />
+                <Route path="/addFacture/:reference" element={<AddFacture />} />
               </Route>
             </Routes>
           </DetailsClientsProfileProvider>
